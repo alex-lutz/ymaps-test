@@ -18,10 +18,10 @@
                     maps.geolocation.get({
                         provider: 'auto',
                         mapStateAutoApply: true,
-                    }).then((result) => {
+                    }).then(result => {
                         console.info('geo result', result);
                         map.geoObjects.add(result.geoObjects);
-                    }).catch((reject) => {
+                    }).catch(reject => {
                         console.info('geo reject', reject);
                     });
                 } catch (error) {
