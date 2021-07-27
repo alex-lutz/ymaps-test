@@ -14,6 +14,18 @@
                 };
 
                 const map = new maps.Map('maps', mapParams);
+                
+                const zoomControl = new maps.control.ZoomControl({
+                  options: {
+                    position: {
+                      left: 'auto',
+                      top: 'auto',
+                      right: 10,
+                      bottom: 10,
+                    },
+                  },
+                });
+                map.controls.add(zoomControl);
 
                 try {
                     maps.geolocation.get({
