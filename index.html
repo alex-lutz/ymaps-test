@@ -1,8 +1,46 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://api-maps.yandex.ru/2.1/?apikey=7105a89d-b1f1-43bf-aa6b-5b90e99999cd&amp;lang=ru_RU&amp;coordorder=latlong&amp;mode=debug"></script>
+    <script type="text/javascript" defer>
+        const init = () => {
+            maps.ready(() => {
+                const mapParams: {
+                    center: number[],
+                    controls: any[],
+                    zoom: number,
+                } = {
+                    center: [59.90945435, 30.29348755],
+                    controls: [],
+                    zoom: 14,
+                };
+
+                const map = new maps.Map('maps', mapParams);
+
+                try {
+                    maps.geolocation.get({
+                        provider: 'auto',
+                        mapStateAutoApply: true,
+                    }).then((result) => {
+                        console.info('geo result', result);
+                        map.geoObjects.add(result.geoObjects);
+                    }).catch((reject) => {
+                        console.info('geo reject', reject);
+                    });
+                } catch (error) {
+                    console.warn('geo error'error);
+                }
+            });
+        }
+
+        if (document.readyState === 'complete') {
+           init();
+        } else {
+            window.addEventListener('load', () => init());
+        }
+    </script>
 </head>
 <body>
-  <div id="maps"></div>
+    <div id="maps"></div>
 </body>
